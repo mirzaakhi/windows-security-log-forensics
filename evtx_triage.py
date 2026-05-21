@@ -77,9 +77,9 @@ def cross_reference(df: pd.DataFrame,
 
         severity = "LOW"
         if has_4624 and has_4688:
-            severity = "CRITICAL"
-        elif has_4624:
             severity = "HIGH"
+        elif has_4624:
+            severity = "MEDIUM"
 
         rows.append({
             "WindowStart":      window_start,
@@ -133,10 +133,10 @@ def main():
         out_path = "flagged_windows.csv"
         summary.to_csv(out_path, index=False)
         print(f"\n[+] Saved enriched summary to: {out_path}")
-        print(f"[+] Total CRITICAL windows: "
-              f"{(summary['Severity'] == 'CRITICAL').sum()}")
         print(f"[+] Total HIGH windows:     "
               f"{(summary['Severity'] == 'HIGH').sum()}")
+        print(f"[+] Total MEDIUM windows:   "
+              f"{(summary['Severity'] == 'MEDIUM').sum()}")
 
 
 if __name__ == "__main__":
